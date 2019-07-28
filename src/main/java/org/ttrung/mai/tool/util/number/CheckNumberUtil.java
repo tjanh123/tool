@@ -2,40 +2,43 @@ package org.ttrung.mai.tool.util.number;
 
 /**
  * functions util checking number
- * <p>these functions only return boolean value
+ * <p>
+ * these functions only return boolean value
+ * 
  * @author ttrung.mai
  *
  */
 public class CheckNumberUtil {
-	
+
 	public static boolean isInsideThresholdAbsolute(Long number, long threshold) {
-		if(number == null) {
+		if (number == null) {
 			return false;
 		}
-		return number >= -threshold && number <= threshold;
+		long positive = Math.abs(threshold);
+		return number >= Math.negateExact(positive) && number <= positive;
 	}
-	
+
 	public static boolean isInsideThresholdAbsolute(Integer number, long threshold) {
-		if(number == null) {
+		if (number == null) {
 			return false;
 		}
 		return number >= -threshold && number <= threshold;
 	}
 
 	public static boolean isNotNullAndNotZero(Long number) {
-		return isInsideThresholdAbsolute(number, 0);
+		return number != null && number.intValue() != 0;
 	}
 
 	public static boolean isNullOrZero(Long number) {
-		return !isInsideThresholdAbsolute(number, 0);
+		return number == null || number.intValue() == 0;
 	}
-	
+
 	public static boolean isNotNullAndNotZero(Integer number) {
-		return isInsideThresholdAbsolute(number, 0);
+		return number != null && number.intValue() != 0;
 	}
 
 	public static boolean isNullOrZero(Integer number) {
-		return !isInsideThresholdAbsolute(number, 0);
+		return number == null || number.intValue() == 0;
 	}
 
 	public static boolean isClassNumber(Class<?> clazz) {

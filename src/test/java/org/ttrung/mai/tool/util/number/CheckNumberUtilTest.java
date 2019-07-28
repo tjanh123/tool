@@ -7,8 +7,7 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(plugin = { "pretty" }, features = {
-		"src/test/resources/org/ttrung/mai/tool/util/number/CheckNumberUtilFeature.feature" }, glue = {
-				"CheckNumberUtilStep", "CheckNumberUtilNullZeroStep" })
+		"src/test/resources/org/ttrung/mai/tool/util/number/CheckNumberUtilFeature.feature" })
 public class CheckNumberUtilTest {
 
 }

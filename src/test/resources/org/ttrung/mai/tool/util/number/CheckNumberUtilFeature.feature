@@ -1,8 +1,7 @@
-@author ttrung.mai
-@tag
 Feature: Check Number Util Feature
 
-  Scenario Outline: Check if <number> is inside threshold absolute (-<threshold>, Math.abs(<threshold>))
+	@tag 1
+  Scenario Outline: Check if number is inside threshold range
     Given I have a number <number>
     Given I have a threshold <threshold>
     When I check if <number> is inside range [-<threshold>, Math.abs(<threshold>)] 
@@ -15,27 +14,3 @@ Feature: Check Number Util Feature
       | 1				| 3			 	| true 		|
       | 4  			| 3			 	| false		|
       
-      
-      
-  Scenario Outline: Check if <number> is null or zero
-    Given I have a number <number>
-    When I check if <number> is null or zero 
-    Then it should be <result>
-
-    Examples: 
-      | number  | result 	|
-      | 0		  	| true 		|
-      | null	  | true 		|
-      | 4	 		 	| false 	|
-      
-      
-  Scenario Outline: Check if <number> is not null and and not zero
-    Given I have a number <number>
-    When I check if <number> is not null and not zero 
-    Then it should be <result>
-
-    Examples: 
-      | number  | result 	|
-      | 0		  	| false 	|
-      | null	  | false 	|
-      | 4	 		 	| true 		|
