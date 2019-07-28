@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.ttrung.mai.tool.type.NumberUtil;
+import org.ttrung.mai.tool.util.number.CheckNumberUtil;
 
 
 @RunWith(SpringRunner.class)
@@ -14,20 +14,20 @@ public class NumberUtilBiggerThanTest {
 
 	@Test
 	public void shouldFalse_WhenOneNumberIsNull() {
-		assertFalse(NumberUtil.isBiggerThan(null, 0L));
-		assertFalse(NumberUtil.isBiggerThan(1.2, null));
-		assertFalse(NumberUtil.isBiggerThan(null, null));
+		assertFalse(CheckNumberUtil.isBiggerThan(null, 0L));
+		assertFalse(CheckNumberUtil.isBiggerThan(1.2, null));
+		assertFalse(CheckNumberUtil.isBiggerThan(null, null));
 	}
 	
 	@Test
 	public void shouldFalse_WhenNum1LessThanNum2() {
-		assertFalse(NumberUtil.isBiggerThan(0L, 0L));
-		assertFalse(NumberUtil.isBiggerThan(1.2, 1.3));
+		assertFalse(CheckNumberUtil.isBiggerThan(0L, 0L));
+		assertFalse(CheckNumberUtil.isBiggerThan(1.2, 1.3));
 	}
 	
 	@Test
 	public void shouldTrue_WhenNum1BiggerThanNum2() {
-		assertTrue(NumberUtil.isBiggerThan(4, 1.3));
+		assertTrue(CheckNumberUtil.isBiggerThan(4, 1.3));
 	}
 	
 }
