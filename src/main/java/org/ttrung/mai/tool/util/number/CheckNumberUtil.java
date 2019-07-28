@@ -8,20 +8,34 @@ package org.ttrung.mai.tool.util.number;
  */
 public class CheckNumberUtil {
 	
-	public static boolean isNotNullAndNotZero(Number number, float threshold) {
-		if (number == null) {
+	public static boolean isInsideThresholdAbsolute(Long number, long threshold) {
+		if(number == null) {
 			return false;
 		}
-		double valDou = number.doubleValue();
-		return valDou >= -threshold && valDou <= threshold;
+		return number >= -threshold && number <= threshold;
+	}
+	
+	public static boolean isInsideThresholdAbsolute(Integer number, long threshold) {
+		if(number == null) {
+			return false;
+		}
+		return number >= -threshold && number <= threshold;
 	}
 
-	public static boolean isNotNullAndNotZero(Number number) {
-		return isNotNullAndNotZero(number, 0.0f);
+	public static boolean isNotNullAndNotZero(Long number) {
+		return isInsideThresholdAbsolute(number, 0);
 	}
 
-	public static boolean isNullOrZero(Number number) {
-		return !isNotNullAndNotZero(number, 0.0f);
+	public static boolean isNullOrZero(Long number) {
+		return !isInsideThresholdAbsolute(number, 0);
+	}
+	
+	public static boolean isNotNullAndNotZero(Integer number) {
+		return isInsideThresholdAbsolute(number, 0);
+	}
+
+	public static boolean isNullOrZero(Integer number) {
+		return !isInsideThresholdAbsolute(number, 0);
 	}
 
 	public static boolean isClassNumber(Class<?> clazz) {
