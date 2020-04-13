@@ -30,9 +30,7 @@ public class DtoUtil {
 			try {
 				value = PropertyUtils.getProperty(dto, prop.getName());
 				PropertyUtils.setProperty(mdl, prop.getName(), value);
-			} catch (IllegalAccessException e) {
-			} catch (InvocationTargetException e) {
-			} catch (NoSuchMethodException e) {
+			} catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
 			}
 
 		}

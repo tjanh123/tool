@@ -14,8 +14,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @JsonInclude(value = Include.NON_NULL)
 public class FileModel {
-	private String id;
+	private Long id;
 	private String url;
+	private String description;
 	private String file;
 
 }
