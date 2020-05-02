@@ -2,10 +2,12 @@ package org.ttrung.mai.tool.util.common;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
@@ -41,6 +43,16 @@ public class ConvertUtil {
 		try {
 			TypeReference<HashMap<String, String>> typeRef = new TypeReference<HashMap<String, String>>() {
 			};
+			return mapper.readValue(json, typeRef);
+		} catch (IOException e) {
+			log.error(e.getMessage(), e);
+		}
+		return null;
+	}
+
+	public static <T> List<T> fromJsonToList(String json, Class<T> clazz) {
+		try {
+			JavaType typeRef = mapper.getTypeFactory().constructCollectionType(List.class, clazz);
 			return mapper.readValue(json, typeRef);
 		} catch (IOException e) {
 			log.error(e.getMessage(), e);
