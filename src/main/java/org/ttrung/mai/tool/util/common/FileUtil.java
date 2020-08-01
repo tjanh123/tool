@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -24,10 +25,11 @@ public class FileUtil {
 		}
 	}
 
-	public static void createFolderIfNotExist(String dir) {
+	public static void createFolderIfNotExist(String dir) throws IOException {
 		File directory = new File(dir);
 		if (!directory.exists()) {
-			directory.mkdir();
+			Path path = Paths.get(dir);
+			Files.createDirectories(path);
 		}
 	}
 
