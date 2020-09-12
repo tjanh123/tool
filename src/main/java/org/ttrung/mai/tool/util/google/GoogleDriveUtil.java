@@ -1,5 +1,6 @@
 package org.ttrung.mai.tool.util.google;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
@@ -34,14 +35,10 @@ public class GoogleDriveUtil {
 
 	public static Drive getDriveService(String serviceAccountEmail, String credentialPath)
 			throws GeneralSecurityException, IOException {
-		HttpTransport httpTransport = new NetHttpTransport();
-		JacksonFactory jsonFactory = new JacksonFactory();
-		List<String> scopes = new ArrayList<>();
-		scopes.add(DriveScopes.DRIVE);
-		GoogleCredential credential = new GoogleCredential.Builder().setTransport(httpTransport)
-				.setJsonFactory(jsonFactory).setServiceAccountId(serviceAccountEmail).setServiceAccountScopes(scopes)
-				.setServiceAccountPrivateKeyFromP12File(new java.io.File(credentialPath)).build();
-		Drive service = new Drive.Builder(httpTransport, jsonFactory, null).setHttpRequestInitializer(credential).setApplicationName("Google Drive Util").setHttpRequestInitializer(new HttpRequestInitializer() {
+		
+		GoogleCredential credential = getCredential(serviceAccountEmail, credentialPath);
+		
+		Drive service = new Drive.Builder(credential.getTransport(), credential.getJsonFactory(), null).setHttpRequestInitializer(credential).setApplicationName("Google Drive Util").setHttpRequestInitializer(new HttpRequestInitializer() {
 
             @Override
             public void initialize(HttpRequest httpRequest) throws IOException {
@@ -54,6 +51,23 @@ public class GoogleDriveUtil {
         })
 				.build();
 		return service;
+	}
+
+	private static GoogleCredential getCredential(String serviceAccountEmail, String credentialPath) throws GeneralSecurityException, IOException {
+		HttpTransport httpTransport = new NetHttpTransport();
+		JacksonFactory jsonFactory = new JacksonFactory();
+		List<String> scopes = new ArrayList<>();
+		scopes.add(DriveScopes.DRIVE);
+		String fileType = FileUtil.getExtension(credentialPath);
+		if("json".equals(fileType)) {
+			return  GoogleCredential.fromStream(new FileInputStream(credentialPath), httpTransport, jsonFactory)
+				    .createScoped(scopes);
+		} else if ("p12".equals(fileType)) {
+			return new GoogleCredential.Builder().setTransport(httpTransport)
+					.setJsonFactory(jsonFactory).setServiceAccountId(serviceAccountEmail).setServiceAccountScopes(scopes)
+					.setServiceAccountPrivateKeyFromP12File(new java.io.File(credentialPath)).build();
+		}
+		return null;
 	}
 
 	public static File createFile(Drive drive, List<Permission> permissions, File fileMetadata, java.io.File fileSource,
