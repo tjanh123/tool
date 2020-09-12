@@ -59,6 +59,7 @@ public class GoogleDriveUtil {
 		List<String> scopes = new ArrayList<>();
 		scopes.add(DriveScopes.DRIVE);
 		String fileType = FileUtil.getExtension(credentialPath);
+		log.info("Getting Credential Type {} from file {}", fileType, credentialPath);
 		if("json".equals(fileType)) {
 			return  GoogleCredential.fromStream(new FileInputStream(credentialPath), httpTransport, jsonFactory)
 				    .createScoped(scopes);
