@@ -5,8 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -15,10 +17,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ConvertUtil {
 
-	private static ObjectMapper mapper = new ObjectMapper();
-
+	private static final ObjectMapper mapper = new ObjectMapper()
+													.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+													.setSerializationInclusion(Include.NON_EMPTY);
 	private ConvertUtil() {
-
 	}
 
 	public static String toJson(Object obj) {
