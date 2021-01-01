@@ -1,6 +1,7 @@
 package org.ttrung.mai.tool.util.common;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,6 +56,21 @@ public class ConvertUtil {
 	public static <T> List<T> fromJsonToList(String json, Class<T> clazz) {
 		try {
 			JavaType typeRef = mapper.getTypeFactory().constructCollectionType(List.class, clazz);
+			return mapper.readValue(json, typeRef);
+		} catch (IOException e) {
+			log.error(e.getMessage(), e);
+		}
+		return null;
+	}
+	
+	public static <T> Collection<T> fromJsonToCollection(String json, Class<?> clazzCollection, Class<T> clazzElement) {
+		try {
+			JavaType typeRef = null;
+			if(Collection.class.isAssignableFrom(clazzCollection)) {
+				typeRef = mapper.getTypeFactory().constructCollectionType((Class<? extends Collection>) clazzCollection, clazzElement);
+			} else {
+				typeRef = mapper.getTypeFactory().constructCollectionType(List.class, clazzElement);
+			}
 			return mapper.readValue(json, typeRef);
 		} catch (IOException e) {
 			log.error(e.getMessage(), e);
