@@ -1,5 +1,8 @@
 package org.ttrung.mai.tool.exception;
 
+import lombok.Getter;
+
+@Getter
 public class GeneralException extends RuntimeException {
 
 	/**
@@ -7,24 +10,13 @@ public class GeneralException extends RuntimeException {
 	 */
 	private static final long serialVersionUID = 3546913050304852214L;
 
-	public GeneralException() {
-		super();
-	}
+	private final String code;
+	private final int status;
 
-	public GeneralException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
-	}
-
-	public GeneralException(String message, Throwable cause) {
-		super(message, cause);
-	}
-
-	public GeneralException(String message) {
+	public GeneralException(String code, int status, String message) {
 		super(message);
-	}
-
-	public GeneralException(Throwable cause) {
-		super(cause);
+		this.code = code;
+		this.status = status;
 	}
 
 }
