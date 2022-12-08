@@ -13,4 +13,8 @@ public class ResourceNotFoundException extends GeneralException {
         super("0003", 404, "Resource " + clazz + " with ID " + id + " is not found");
     }
 
+    public ResourceNotFoundException(String domain, Object id) {
+        super("0003", 404, "Resource " + domain + " with ID " + id + " is not found");
+    }
+
 }
