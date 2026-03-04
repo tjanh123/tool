@@ -1,19 +1,17 @@
 package org.ttrung.mai.tool.util.common;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Objects;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.junit.jupiter.api.Test;
 import org.ttrung.mai.tool.model.inf.Dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-@RunWith(SpringRunner.class)
 public class DtoUtilConvertTest {
 
 	@Test
@@ -32,10 +30,10 @@ public class DtoUtilConvertTest {
 		assertTrue(Objects.isNull(model.getName2()));
 	}
 
-	@Test(expected = InstantiationException.class)
+	@Test
 	public void shouldException_WhenNoConstructorWithoutArgs() throws InstantiationException, IllegalAccessException {
 		SimpleDto dto = new SimpleDtoImpl(11, "String 11");
-		DtoUtil.convertToModel(dto, SimpleModel3.class);
+		assertThrows(InstantiationException.class, () -> DtoUtil.convertToModel(dto, SimpleModel3.class));
 	}
 
 	@Getter

@@ -1,13 +1,10 @@
 package org.ttrung.mai.tool.type;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.junit.jupiter.api.Test;
 import org.ttrung.mai.tool.model.TupleKeyValue;
 
-@RunWith(SpringRunner.class)
 public class TupleKeyValueTest {
 
 	@Test

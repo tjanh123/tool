@@ -1,6 +1,7 @@
 package org.ttrung.mai.tool.util.number;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -29,12 +30,12 @@ public class CheckNumberUtilStep {
 	@Then("it should be true")
 	public void it_should_be_true() {
 		System.out.println(number + "ss" + result);
-		assertEquals(result, true);
+		assertTrue(result);
 	}
 
 	@Then("it should be false")
 	public void it_should_be_false() {
-		assertEquals(result, false);
+		assertFalse(result);
 	}
 	
 	@When("I check if {int} is null or zero")
